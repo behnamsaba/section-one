@@ -14,18 +14,6 @@ function navAllStories(evt) {
 
 $body.on("click", "#nav-all", navAllStories);
 
-/** Show story submit form on clicking story "submit" */
-
-function navSubmitStoryClick(evt) {
-  console.debug("navSubmitStoryClick", evt);
-  hidePageComponents();
-  $allStoriesList.show();
-  $submitForm.show();
-}
-
-$navSubmitStory.on("click", navSubmitStoryClick);
-
-
 /** Show login/signup on click on "login" */
 
 function navLoginClick(evt) {
@@ -41,8 +29,19 @@ $navLogin.on("click", navLoginClick);
 
 function updateNavOnLogin() {
   console.debug("updateNavOnLogin");
-  $(".main-nav-links").show();
-  $navLogin.hide();
+  $(".main-nav-links").show();////submit-favorite and mystory appears
+  $navLogin.hide();//login hides
   $navLogOut.show();
   $navUserProfile.text(`${currentUser.username}`).show();
 }
+
+$body.on("click","#nav-submit-story",function(){
+  //when click on submit to create story!
+  $allStoriesList.hide();
+  $("#submit-form").show();
+  
+
+
+
+})
+
