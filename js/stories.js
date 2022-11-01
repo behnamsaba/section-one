@@ -35,6 +35,11 @@ function generateStoryMarkup(story) {
     `);
 }
 
+function addFavButton(){
+  return $("#all-stories-list li").append("<button>favorite</button>")
+}
+
+
 /** Gets list of stories from server, generates their HTML, and puts on page. */
 
 function putStoriesOnPage() {
@@ -70,4 +75,62 @@ async function submitNewStory(evt){
   $("#submit-form").hide();
   $allStoriesList.show();
 }
+
+
+
+///favorite:
+
+async function favelist(){
+  const storyId = $(this).closest("li").attr("id");
+  console.log(storyList.stories);
+  const favStory = storyList.stories.find((fa) => fa.storyId === storyId); //find story object with intended story Id
+  console.log(favStory)
+  if($(this).attr("data-favorite") === "liked"){
+    $(this).css("background-color","lightgray");;
+    $(this).text("unlike");
+    await currentUser.removeFavorite(favStory);
+  }
+  else{
+    $(this).attr("data-favorite","liked");
+    $(this).css("background-color","green");
+    $(this).text("unlike");
+    await currentUser.addFavorite(favStory);
+  }
+
+  
+
+}
+
+$("#all-stories-list").on("click","button",favelist);
+
+
+
+function putFave() {
+
+  $allStoriesList.empty();
+
+  // loop through all of our stories and generate HTML for them
+  for (let story of currentUser.favorites) {
+    const $story = generateStoryMarkup(story);
+    $allStoriesList.append($story);
+  }
+
+  $allStoriesList.show();
+}
+
+function test(){
+  if(currentUser.favorites.length === 0){
+    $allStoriesList.hide();
+    $body.append("<h3>Sorry there is no fave yet!</h3>");
+
+  }else{
+    putFave()
+    $("#all-stories-list li").append("<button>unlike</button>")
+
+
+  }
+}
+$("#nav-favorites").on("click",test);
+
+
 

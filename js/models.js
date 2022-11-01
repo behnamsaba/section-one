@@ -209,4 +209,32 @@ class User {
       return null;
     }
   }
+
+  //favorite:
+
+  
+  async addFavorite(favStory){
+    this.favorites.push(favStory);
+    await this.addOrRemoveFavorite("add",favStory)
+    console.log(this.favorites)
+  }
+  
+  async removeFavorite(favStory){
+    this.favorites =this.favorites.filter(s=>s.storyId !==favStory.storyId);
+    await this.addOrRemoveFavorite("remove",favStory);
+    console.log(this.favorites)
+  }
+  
+  async addOrRemoveFavorite(newState, favStory) {
+    const method = newState === "add" ? "POST" : "DELETE";
+    const token = this.loginToken;
+    await axios({
+      url: `${BASE_URL}/users/${this.username}/favorites/${favStory.storyId}`,
+      method: method,
+      data: { token },
+    });
+  }
+  isFavorite(story) {
+    return this.favorites.some(s => (s.storyId === story.storyId));
+  }
 }
