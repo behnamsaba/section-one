@@ -125,6 +125,7 @@ function test(){
 
   }else{
     putFave()
+    updateNavOnLogin();
     $("#all-stories-list li").append("<button>unlike</button>")
 
 
