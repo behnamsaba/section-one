@@ -54,6 +54,7 @@ function putStoriesOnPage() {
   }
 
   $allStoriesList.show();
+  
 }
 
 
@@ -90,6 +91,10 @@ async function favelist(){
     $(this).text("unlike");
     await currentUser.removeFavorite(favStory);
   }
+  else if($(this).text() === "Delete"){
+    $(this).closest("li").remove();
+    await currentUser.removeFavorite(favStory);
+  }
   else{
     $(this).attr("data-favorite","liked");
     $(this).css("background-color","green");
@@ -109,10 +114,12 @@ function putFave() {
 
   $allStoriesList.empty();
 
-  // loop through all of our stories and generate HTML for them
-  for (let story of currentUser.favorites) {
+  // change currentuser favorite array to set to avoid duplicate
+  let faveSet = new Set(currentUser.favorites);
+  for (let story of faveSet) {
     const $story = generateStoryMarkup(story);
     $allStoriesList.append($story);
+    
   }
 
   $allStoriesList.show();
@@ -126,12 +133,17 @@ function test(){
   }else{
     putFave()
     updateNavOnLogin();
-    $("#all-stories-list li").append("<button>unlike</button>")
+    $("#all-stories-list button").text("Delete")
 
 
   }
 }
 $("#nav-favorites").on("click",test);
+
+
+
+
+
 
 
 

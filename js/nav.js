@@ -49,3 +49,6 @@ $body.on("click","#nav-submit-story",function(){
 
 })
 
+
+//add event listner on hack or snooze:
+$("#nav-all").on("click",start);
