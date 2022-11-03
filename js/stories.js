@@ -19,6 +19,7 @@ async function getAndShowStoriesOnStart() {
  * Returns the markup for the story.
  */
 
+
 function generateStoryMarkup(story) {
   // console.debug("generateStoryMarkup", story);
 
@@ -31,13 +32,13 @@ function generateStoryMarkup(story) {
         <small class="story-hostname">(${hostName})</small>
         <small class="story-author">by ${story.author}</small>
         <small class="story-user">posted by ${story.username}</small>
+        <button>favorite</button>
       </li>
     `);
+    
 }
 
-function addFavButton(){
-  return $("#all-stories-list li").append("<button>favorite</button>")
-}
+
 
 
 /** Gets list of stories from server, generates their HTML, and puts on page. */
@@ -51,7 +52,9 @@ function putStoriesOnPage() {
   for (let story of storyList.stories) {
     const $story = generateStoryMarkup(story);
     $allStoriesList.append($story);
+  
   }
+  
 
   $allStoriesList.show();
   
@@ -74,7 +77,8 @@ async function submitNewStory(evt){
   $("#create-author").val("");
   $("#create-url").val("");
   $("#submit-form").hide();
-  $allStoriesList.show();
+  // $allStoriesList.show();
+  start()
 }
 
 

@@ -30,7 +30,6 @@ $navLogin.on("click", navLoginClick);
 function updateNavOnLogin() {
   console.debug("updateNavOnLogin");
   $(".main-nav-links").show();////submit-favorite and mystory appears
-  addFavButton();
 
 
   $navLogin.hide();//login hides
