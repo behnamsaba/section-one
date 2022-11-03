@@ -42,7 +42,9 @@ function updateNavOnLogin() {
 $body.on("click","#nav-submit-story",function(){
   //when click on submit to create story!
   $allStoriesList.hide();
+  $("#empty").hide();
   $("#submit-form").show();
+  
   
 
 

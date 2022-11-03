@@ -35,7 +35,9 @@ function hidePageComponents() {
 /** Overall function to kick off the app. */
 
 async function start() {
+  $("#empty").hide()
   console.debug("start");
+  $("#submit-form").hide();
 
   // "Remember logged-in user" and log in, if credentials in localStorage
   await checkForRememberedUser();

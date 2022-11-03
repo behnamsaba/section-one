@@ -81,6 +81,15 @@ async function submitNewStory(evt){
 
 ///favorite:
 
+// find the story Id in storyList.stories which is in model.js, and add the story to the favorite list to API
+// or unmarked, remove the story to the favorite list to API .
+
+// addFavoritList()- when there is no list on favorite section, show msg "No favorites yet" .
+//  when there is list, remove msg and let the stories put in the stories list.
+
+// removeSt(evt)-removeBtn evt
+
+
 async function favelist(){
   const storyId = $(this).closest("li").attr("id");
   console.log(storyList.stories);
@@ -126,9 +135,10 @@ function putFave() {
 }
 
 function test(){
+  $("#submit-form").hide()
   if(currentUser.favorites.length === 0){
     $allStoriesList.hide();
-    $body.append("<h3>Sorry there is no fave yet!</h3>");
+    $body.append("<h3 id=empty >Sorry there is no fave yet!</h3>");
 
   }else{
     putFave()
